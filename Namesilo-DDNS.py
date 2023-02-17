@@ -4,7 +4,7 @@ import logging
 # Run once every-boot
 
 LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
-logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT,filename='./ddns-log.txt')
+logging.basicConfig(level=logging.INFO, format=LOG_FORMAT,filename='./ddns-log.txt')
 
 session = requests.Session()
 session.trust_env = False
@@ -55,7 +55,7 @@ if __name__ == "__main__":
             rrid = get_rrid(key,superDomain,subDomain)
             update_record(key,superDomain,subDomain,rrid,myIP)
         except BaseException:
-            pass
+            time.sleep(1)
         else:
             break
     logging.debug("Program Finished")
